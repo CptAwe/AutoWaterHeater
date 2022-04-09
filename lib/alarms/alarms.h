@@ -21,7 +21,7 @@ class alarms {
                 {17, 00}// stop
             }
         };
-        int Waterheater_on_duration = 10;// How many seconds the waterheater will be on for
+        int Waterheater_on_duration = 1800;// How many seconds the waterheater will be on for
         //________WATERHEATER________
 };
 

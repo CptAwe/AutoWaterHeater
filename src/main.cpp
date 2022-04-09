@@ -129,7 +129,9 @@ void showTime(DateTime time_input) {
 
 void turnWaterHeaterON() {
     DateTime turned_on_at = clock.now();
-    turn_off_at = turned_on_at + TimeSpan(0, 0, 0, alrms.Waterheater_on_duration);
+    int minutes = alrms.Waterheater_on_duration/60;
+    int seconds = alrms.Waterheater_on_duration%60;
+    turn_off_at = turned_on_at + TimeSpan(0, 0, minutes, seconds);
 
     showTime();
     Serial.print(" -- Turning on waterheater for ");
@@ -143,6 +145,10 @@ void turnWaterHeaterON() {
     Serial.print("|- Should be turned off at ");
     showTime(turn_off_at);
     Serial.println();
+
+    // The button is registered as pressed when the big relay is turned on
+    delay(500);
+    was_button_pressed = false;
 }
 
 void turnWaterHeaterOFF() {
@@ -150,6 +156,11 @@ void turnWaterHeaterOFF() {
     Serial.println(" -- Turning off the waterheater...");
     WaterHeater.off();
     status_led.off();
+    
+    // The button is registered as pressed when the big relay is turned on
+    delay(500);
+    was_button_pressed = false;
+
 }
 
 //-----------------------------------------------
